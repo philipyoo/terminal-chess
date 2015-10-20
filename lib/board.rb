@@ -1,4 +1,5 @@
-require_relative 'pieces/test_piece'
+
+
 
 class Board
   attr_reader :board
@@ -13,22 +14,6 @@ class Board
     #updates pieces on board
   end
 
-  def display_board
-    #temp display board for testing
-    @board.each do |row|
-      temp = []
-      row.each do |el|
-        if el.nil?
-          temp << " "
-        else
-          temp << el.piece
-        end
-      end
-
-      puts temp.join(" ")
-    end
-  end
-
   private
 
   def setup_board
@@ -40,6 +25,3 @@ class Board
   end
 
 end
-
-ace = Board.new
-ace.display_board
