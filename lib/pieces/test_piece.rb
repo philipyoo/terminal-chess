@@ -1,8 +1,16 @@
 
 class TestPiece
-  attr_reader :piece
+  attr_reader :img
 
   def initialize
-    @piece = "O"
+    @img = " O "
+  end
+end
+
+class EmptyPiece
+  attr_reader :img
+
+  def initialize
+    @img = "   "
   end
 end
