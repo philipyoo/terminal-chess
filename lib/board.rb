@@ -2,13 +2,31 @@ require_relative 'pieces/test_piece'
 
 class Board
   attr_reader :board
+
   def initialize
     @board = Array.new(8) { Array.new(8) }
     setup_board
   end
 
   def move(start_pos, end_pos)
+    #raise error if no piece at start_pos and/or can't move selected piece to end_pos assigned
     #updates pieces on board
+  end
+
+  def display_board
+    #temp display board for testing
+    @board.each do |row|
+      temp = []
+      row.each do |el|
+        if el.nil?
+          temp << " "
+        else
+          temp << el.piece
+        end
+      end
+
+      puts temp.join(" ")
+    end
   end
 
   private
@@ -24,4 +42,4 @@ class Board
 end
 
 ace = Board.new
-p ace.board
+ace.display_board
