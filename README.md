@@ -13,7 +13,8 @@ A 2-Player Chess game played in the terminal.
 ## Setup
 
 In the terminal:
+
 1. `git clone https://github.com/philipyoo/terminal-chess.git`
-2. `cd terminal-chess`
-3. `gem install colorize`
-4. --ADD NEXT STEPS HERE-- (Incomplete)
+2. `cd terminal-chess` 
+3. `gem install colorize` 
+4. --ADD NEXT STEPS HERE-- (Incomplete) 
