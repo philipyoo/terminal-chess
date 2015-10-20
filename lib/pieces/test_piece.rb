@@ -3,7 +3,7 @@ class TestPiece
   attr_reader :img
 
   def initialize
-    @img = "O"
+    @img = " O "
   end
 end
 
@@ -11,6 +11,6 @@ class EmptyPiece
   attr_reader :img
 
   def initialize
-    @img = " "
+    @img = "   "
   end
 end

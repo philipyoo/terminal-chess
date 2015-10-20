@@ -19,8 +19,12 @@ class Board
   def setup_board
     rows = [0, 1, 6, 7]
 
-    rows.each do |row|
-      @board[row].map! { TestPiece.new }
+    8.times do |i|
+      if rows.include?(i)
+        @board[i].map! { TestPiece.new }
+      else
+        @board[i].map! { EmptyPiece.new }
+      end
     end
   end
 
