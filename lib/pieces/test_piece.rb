@@ -11,6 +11,6 @@ class EmptyPiece
   attr_reader :image
 
   def initialize
-    @image = "   "
+    @image = "    "
   end
 end

@@ -4,7 +4,12 @@ class Rook
 
   def initialize(color, position)
     @color, @position = color, position
-    @image = " R "
+    @image = " #{symbol(color)}  "
+  end
+
+  def symbol(color)
+    unicode = color == :white ? "\u2656" : "\u265C"
+    unicode.encode('utf-8')
   end
 
   def move_dirs
