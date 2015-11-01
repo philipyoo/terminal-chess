@@ -1,14 +1,14 @@
-require_relative 'slideable'
+
 
 
 class Queen
-  include Slideable
+  attr_reader :image
 
-  def symbol
-    " Q "
+  def initialize(color, position)
+    @color, @position = color, position
+    @image = " Q "
   end
 
   def move_dirs
-    dirs_diagonal + dirs_straight
   end
 end
