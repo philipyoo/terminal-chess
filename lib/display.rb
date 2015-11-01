@@ -22,7 +22,7 @@ class Display
       if !piece.nil?
       #   piece.colorize(color)
       # else
-        piece.img.colorize(color)
+        piece.image.colorize(color)
       end
     end
   end
@@ -40,7 +40,7 @@ class Display
   end
 
   def render
-    puts "Test:"
+    puts "Board:"
     build_grid.each { |row| puts row.join }
   end
 
