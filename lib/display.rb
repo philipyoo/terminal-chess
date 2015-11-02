@@ -39,9 +39,11 @@ class Display
       update_cursor(MOVES[key])
     when :return
       #select piece and display info
+      @selected = @cursor
     when :backspace, :delete
       #deselect piece and display corrected info.
-      #if no piece selected,
+      #if no piece selected?
+      @selected = false
     when :ctrl_c
       puts "Exiting game.."
       exit 0
@@ -68,7 +70,7 @@ class Display
   def build_row(row, i)
     row.map.with_index do |piece, j|
       color = colorize_game(i, j, piece.color)
-      if piece.is_a?(EmptyPiece)    # piece exists
+      if piece.is_a?(EmptyPiece)
         piece.image.colorize(color)
       else
         piece.image.colorize(color)
