@@ -2,16 +2,16 @@
 require_relative 'piece'
 
 class Board
-  attr_reader :board
+  attr_reader :grid
 
   def initialize
-    @board = Array.new(8) { Array.new(8) }
-    setup_board
+    @grid = Array.new(8) { Array.new(8) }
+    setup_grid
   end
 
   def move(start_pos, end_pos)
     #raise error if no piece at start_pos and/or can't move selected piece to end_pos assigned
-    #updates pieces on board
+    #updates pieces on grid
   end
 
   private
@@ -21,7 +21,7 @@ class Board
     i = (color == :white) ? 7 : 0
 
     back_pieces.each_with_index do |piece, j|
-      @board[i][j] = piece.new(color, [i, j])
+      @grid[i][j] = piece.new(color, [i, j])
     end
 
   end
@@ -29,7 +29,7 @@ class Board
   def pawn_rows(color)
     i = (color == :white) ? 6 : 1
 
-    @board[i].map! do |j|
+    @grid[i].map! do |j|
       Pawn.new(color, [i, j])
     end
   end
@@ -38,11 +38,11 @@ class Board
     rows = [2, 3, 4, 5]
 
     rows.each do |row|
-      @board[row].map! { EmptyPiece.new }
+      @grid[row].map! { EmptyPiece.new }
     end
   end
 
-  def setup_board
+  def setup_grid
     empty_rows
     [:white, :light_yellow].each do |color|
       back_rows(color)
