@@ -8,9 +8,10 @@ class TestPiece
 end
 
 class EmptyPiece
-  attr_reader :img
+  attr_reader :image, :color
 
   def initialize
-    @img = "   "
+    @color = :default
+    @image = "    "
   end
 end
