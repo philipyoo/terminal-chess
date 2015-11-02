@@ -117,8 +117,8 @@ end
 
 ## Driver Code Tests:
 
-ace = Board.new
-
-bay = Display.new(ace.board)
-
-bay.render
+# ace = Board.new
+#
+# bay = Display.new(ace.board)
+#
+# bay.render
