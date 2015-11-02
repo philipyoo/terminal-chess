@@ -2,7 +2,7 @@
 
 
 class Queen
-  attr_reader :image
+  attr_reader :image, :color
 
   def initialize(color, position)
     @color, @position = color, position
@@ -10,8 +10,7 @@ class Queen
   end
 
   def symbol(color)
-    unicode = color == :white ? "\u2655" : "\u265B"
-    unicode.encode('utf-8')
+    "\u265B".encode('utf-8')
   end
 
   def move_dirs

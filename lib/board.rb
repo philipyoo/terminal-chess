@@ -20,7 +20,7 @@ class Board
     back_pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
     i = (color == :white) ? 7 : 0
 
-    back_pieces.each_with_index do |piece, j|  #j == idx
+    back_pieces.each_with_index do |piece, j|
       @board[i][j] = piece.new(color, [i, j])
     end
 
@@ -44,7 +44,7 @@ class Board
 
   def setup_board
     empty_rows
-    [:white, :black].each do |color|
+    [:white, :light_yellow].each do |color|
       back_rows(color)
       pawn_rows(color)
     end

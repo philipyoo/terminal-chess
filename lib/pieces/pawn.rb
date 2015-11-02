@@ -1,6 +1,6 @@
 
 class Pawn
-  attr_reader :image
+  attr_reader :image, :color
 
   def initialize(color, position)
     @color, @position = color, position
@@ -8,8 +8,7 @@ class Pawn
   end
 
   def symbol(color)
-    unicode = color == :white ? "\u2659" : "\u265F"
-    unicode.encode('utf-8')
+    "\u265F".encode('utf-8')
   end
 
   def move_dirs

@@ -1,6 +1,6 @@
 
 class Bishop
-  attr_reader :image
+  attr_reader :image, :color
 
   def initialize(color, position)
     @color, @position = color, position
@@ -8,8 +8,7 @@ class Bishop
   end
 
   def symbol(color)
-    unicode = color == :white ? "\u2657" : "\u265D"
-    unicode.encode('utf-8')
+    "\u265D".encode('utf-8')
   end
 
   def move_dirs

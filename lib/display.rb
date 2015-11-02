@@ -18,25 +18,25 @@ class Display
 
   def build_row(row, i)
     row.map.with_index do |piece, j|
-      color = colorize_game(i, j)
-      if !piece.nil?
-      #   piece.colorize(color)
-      # else
+      color = colorize_game(i, j, piece.color)
+      if piece.is_a?(EmptyPiece)    # piece exists
+        piece.image.colorize(color)
+      else
         piece.image.colorize(color)
       end
     end
   end
 
-  def colorize_game(i, j)
+  def colorize_game(i, j, piece_color)
     if @cursor == [i, j]
-      bg = :red
+      bg = :green
     elsif (i + j).odd?
-      bg = :light_black
+      bg = :magenta
     else
       bg = :blue
     end
 
-    { background: bg, color: :white }
+    { background: bg, color: piece_color }
   end
 
   def render

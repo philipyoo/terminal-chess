@@ -1,6 +1,6 @@
 
 class Rook
-  attr_reader :image
+  attr_reader :image, :color
 
   def initialize(color, position)
     @color, @position = color, position
@@ -8,8 +8,7 @@ class Rook
   end
 
   def symbol(color)
-    unicode = color == :white ? "\u2656" : "\u265C"
-    unicode.encode('utf-8')
+    "\u265C".encode('utf-8')
   end
 
   def move_dirs
