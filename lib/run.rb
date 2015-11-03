@@ -1,21 +1,24 @@
 require_relative 'display'
-require 'colorize'
 
 class Play
   def initialize
     @board = Board.new
     @grid = Display.new(@board.grid)
-    @current_player = @player1
     @current_color = :white
   end
 
   def run_game
     intro
 
-    while !win_condition
+    until win_condition
       instructions
       puts "#{@current_player}".colorize(@current_color).bold
       @grid.render
+      puts "-----"
+
+      while @grid.handle_input != "switch"
+        @grid.handle_input
+      end
 
       switch_player
     end
@@ -37,6 +40,8 @@ class Play
     @player2 = gets.chomp
     puts "Thank you #{@player2.colorize(:light_yellow).bold} and welcome to the game!"
 
+    @current_player = @player1
+
     sleep(2)
   end
 
@@ -47,10 +52,11 @@ class Play
     puts "Use the enter/return key to select a piece."
     puts "Use the delete/backspace key to de-select a piece."
     puts "Use CTRL + C to exit the game."
-    puts "------"
+    puts "-----"
   end
 
   def win_condition
+    false
   end
 end
 

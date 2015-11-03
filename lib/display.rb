@@ -36,20 +36,33 @@ class Display
     case user_input
     when :up, :down, :right, :left
       #update cursor position
-      update_cursor(MOVES[key])
+      update_cursor(MOVES[user_input])
+      puts "arrows"
     when :return
       #select piece and display info
+      if @selected == @cursor
+        #check if piece move is valid // this will be checked in board || piece file
+        #depending on return...
+        @selected = false
+        return "switch"
+      end
+
       @selected = @cursor
+      puts "enter"
     when :backspace, :delete
       #deselect piece and display corrected info.
       #if no piece selected?
       @selected = false
+      puts "delete"
     when :ctrl_c
       puts "Exiting game.."
       exit 0
     else
       puts "Key unknown"
     end
+
+    system("clear")
+    render
   end
 
   def update_cursor(movement)
@@ -113,12 +126,3 @@ class Display
 
 
 end
-
-
-## Driver Code Tests:
-
-# ace = Board.new
-#
-# bay = Display.new(ace.board)
-#
-# bay.render
