@@ -11,12 +11,12 @@ class Play
     intro
 
     until win_condition
-      instructions
-      puts "#{@current_player}".colorize(@current_color).bold
-      @grid.render
-      puts "-----"
 
       while @grid.handle_input != "switch"
+        instructions
+        puts "#{@current_player}".colorize(@current_color).bold
+        @grid.render
+        puts "-----"
         @grid.handle_input
       end
 
