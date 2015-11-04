@@ -40,14 +40,14 @@ class Display
       puts "arrows"
     when :return
       #select piece and display info
-      if @selected == @cursor
+      if @selected == @cursor # && move == valid
         #check if piece move is valid // this will be checked in board || piece file
         #depending on return...
         @selected = false
         return "switch"
       end
 
-      @selected = @cursor
+      @selected = @cursor  # if own piece && valid selection
       puts "enter"
     when :backspace, :delete
       #deselect piece and display corrected info.
@@ -98,6 +98,10 @@ class Display
       bg = :magenta
     else
       bg = :blue
+    end
+
+    if @selected && [i, j] == @selected
+      bg = :light_magenta
     end
 
     { background: bg, color: piece_color }

@@ -1,4 +1,3 @@
-
 require_relative 'piece'
 
 class Board
@@ -21,7 +20,7 @@ class Board
     i = (color == :white) ? 7 : 0
 
     back_pieces.each_with_index do |piece, j|
-      @grid[i][j] = piece.new(color, [i, j])
+      @grid[i][j] = piece.new(color, [i, j], @grid)
     end
 
   end
@@ -30,7 +29,7 @@ class Board
     i = (color == :white) ? 6 : 1
 
     @grid[i].map! do |j|
-      Pawn.new(color, [i, j])
+      Pawn.new(color, [i, j], @grid)
     end
   end
 
