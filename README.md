@@ -17,4 +17,5 @@ In the terminal:
 1. `git clone https://github.com/philipyoo/terminal-chess.git`
 2. `cd terminal-chess` 
 3. `gem install colorize` 
-4. --ADD NEXT STEPS HERE-- (Incomplete) 
+4. `ruby run.rb`
+5. Play the game! Instructions in-game  :)
