@@ -8,10 +8,16 @@ class Board
     setup_grid
   end
 
-  def move(start_pos, end_pos)
+  def move(color, start_pos, end_pos)
     #raise error if no piece at start_pos and/or can't move selected piece to end_pos assigned
     #updates pieces on grid
   end
+
+  def empty?
+    self[position].empty?
+  end
+
+
 
   private
 

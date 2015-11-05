@@ -23,13 +23,13 @@ class Display
     down:  [1, 0]
   }
 
-  def initialize(board)
-    @grid = board
+  def initialize(grid)
+    @grid = grid
     @cursor = [0, 0]
-    @selected = false
+    @selected = nil
   end
 
-  def handle_input
+  def handle_input(color, select_piece = false)
     #get users input keystroke and get the symbol
     user_input = KEYSTROKES[read_char]
 
@@ -37,23 +37,23 @@ class Display
     when :up, :down, :right, :left
       #update cursor position
       update_cursor(MOVES[user_input])
-      puts "arrows"
+      return nil
     when :return
-      #select piece and display info
-      if @selected == @cursor # && move == valid
-        #check if piece move is valid // this will be checked in board || piece file
-        #depending on return...
-        @selected = false
-        return "switch"
+      if select_piece
+        @selected = nil
+        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].color == color
+      else
+        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].empty?
       end
 
-      @selected = @cursor  # if own piece && valid selection
-      puts "enter"
+      if @selected != nil
+        return @cursor
+      else
+        return nil
+      end
     when :backspace, :delete
-      #deselect piece and display corrected info.
-      #if no piece selected?
       @selected = false
-      puts "delete"
+      return "reset"
     when :ctrl_c
       puts "Exiting game.."
       exit 0
@@ -63,6 +63,10 @@ class Display
 
     system("clear")
     render
+  end
+
+  def find_piece
+    @grid.flatten.find { |piece| piece.position == @cursor }
   end
 
   def update_cursor(movement)
@@ -83,11 +87,8 @@ class Display
   def build_row(row, i)
     row.map.with_index do |piece, j|
       color = colorize_game(i, j, piece.color)
-      if piece.is_a?(EmptyPiece)
-        piece.image.colorize(color)
-      else
-        piece.image.colorize(color)
-      end
+
+      piece.image.colorize(color)
     end
   end
 
