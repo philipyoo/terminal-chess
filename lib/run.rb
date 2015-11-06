@@ -1,9 +1,11 @@
 require_relative 'display'
 
 class Play
+  attr_reader :current_color
+
   def initialize
     @board = Board.new
-    @grid = Display.new(@board.grid)
+    @display = Display.new(@board.grid)
     @current_color = :white
   end
 
@@ -11,18 +13,36 @@ class Play
     intro
 
     until win_condition
+      begin
+        start_pos, end_pos = nil, nil
 
-      while @grid.handle_input != "switch"
-        instructions
-        puts "#{@current_player}".colorize(@current_color).bold
-        @grid.render
-        puts "-----"
-        @grid.handle_input
-      end
+        until start_pos && end_pos
+            instructions
+            puts "#{@current_player}".colorize(@current_color).bold
+            @display.render
+            puts "-----"
 
+            if start_pos
+              puts "Selected Piece. Move where?"
+              end_pos = @display.handle_input(current_color)
+
+              if end_pos == "reset"
+                start_pos, end_pos = nil, nil
+              end
+            else
+              puts "Select a piece."
+              start_pos = @display.handle_input(current_color, true)
+            end
+        end
+
+      @board.move(@current_color, start_pos, end_pos)
       switch_player
+      rescue StandardError => e
+        retry
+      end
     end
 
+    puts "GAME OVER!"
   end
 
   def switch_player
@@ -62,6 +82,7 @@ end
 
 
 ## Driver Code Tests:
-
-ace = Play.new
-ace.run_game
+if __FILE__ == $0
+  ace = Play.new
+  ace.run_game
+end
