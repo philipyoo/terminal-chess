@@ -43,7 +43,7 @@ class Display
         @selected = nil
         @selected = @cursor if @grid[@cursor[0]][@cursor[1]].color == color
       else
-        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].empty?
+        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].empty?(@cursor)
       end
 
       if @selected != nil
