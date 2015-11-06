@@ -8,16 +8,42 @@ class Board
     setup_grid
   end
 
+  def [](position)
+    y, x = position
+    @grid[y][x]
+  end
+
+  def []=(position, piece)
+    y, x = position
+    @grid[y][x] = piece
+  end
+
   def move(color, start_pos, end_pos)
     #raise error if no piece at start_pos and/or can't move selected piece to end_pos assigned
-    #updates pieces on grid
+    piece = self[start_pos]
+
+    p "#{piece.valid_moves}"
+    #If !check?
+    if piece.valid_moves.include?(end_pos)
+      move_piece!(start_pos, end_pos)
+    else
+      raise StandardError, "Invalid move"
+    end
   end
 
-  def empty?
-    self[position].empty?
+  def move_piece!(start_pos, end_pos)
+    piece = self[start_pos]
+
+    self[end_pos] = piece
+    piece.position = end_pos
+    self[start_pos] = EmptyPiece.new
+
+    nil
   end
 
-
+  def empty?(position)
+    self.empty?(position)
+  end
 
   private
 
@@ -34,8 +60,8 @@ class Board
   def pawn_rows(color)
     i = (color == :white) ? 6 : 1
 
-    @grid[i].map! do |j|
-      Pawn.new(color, [i, j], @grid)
+    @grid[i].each.with_index do |el, j|
+      @grid[i][j] = Pawn.new(color, [i, j], @grid)
     end
   end
 
