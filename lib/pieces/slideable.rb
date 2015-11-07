@@ -21,10 +21,6 @@ module Slideable
     moves
   end
 
-  def valid_position?(coords)
-    coords.all? { |coord| coord.between?(0, 7) }
-  end
-
   def unblocked_moves(dir_y, dir_x)
     current_y, current_x = @position
 
