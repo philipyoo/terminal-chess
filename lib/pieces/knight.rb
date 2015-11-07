@@ -1,10 +1,13 @@
 require_relative 'piece'
 
 class Knight < Piece
+  include Stepable
+
   def symbol(color)
     "\u265E".encode('utf-8')
   end
 
-  def move_dirs
+  def dirs
+    [[-1, -2], [-2, -1], [-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2]]
   end
 end

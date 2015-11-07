@@ -15,28 +15,27 @@ class Play
     until win_condition
       begin
         start_pos, end_pos = nil, nil
-
         until start_pos && end_pos
-            instructions
-            puts "#{@current_player}".colorize(@current_color).bold
-            @display.render
-            puts "-----"
+          instructions
+          puts "#{@current_player}".colorize(@current_color).bold
+          @display.render
+          puts "-----"
 
-            if start_pos
-              puts "Selected Piece. Move where?"
-              end_pos = @display.handle_input(current_color)
+          if start_pos
+            puts "Selected Piece. Move where?"
+            end_pos = @display.handle_input(current_color)
 
-              if end_pos == "reset"
-                start_pos, end_pos = nil, nil
-              end
-            else
-              puts "Select a piece."
-              start_pos = @display.handle_input(current_color, true)
+            if end_pos == "reset"
+              start_pos, end_pos = nil, nil
             end
+          else
+            puts "Select a piece."
+            start_pos = @display.handle_input(current_color, true)
+          end
         end
 
-      @board.move(@current_color, start_pos, end_pos)
-      switch_player
+        @board.move(@current_color, start_pos, end_pos)
+        switch_player
       rescue StandardError => e
         retry
       end
@@ -62,11 +61,11 @@ class Play
 
     @current_player = @player1
 
-    sleep(2)
+    sleep(1)
   end
 
   def instructions
-    system("clear")
+    # system("clear")
     puts "Instructions: "
     puts "Use the arrow keys to move the cursor."
     puts "Use the enter/return key to select a piece."
@@ -80,8 +79,7 @@ class Play
   end
 end
 
-
-## Driver Code Tests:
+## Autorun game on console run ##
 if __FILE__ == $0
   ace = Play.new
   ace.run_game
