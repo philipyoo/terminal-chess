@@ -41,9 +41,13 @@ class Display
     when :return
       if select_piece
         @selected = nil
-        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].color == color
+        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].color ==  color
+        puts "@selected: #{@selected}"
+        puts "#{@grid[@cursor[0]][@cursor[1]]}"
       else
-        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].empty?(@cursor)
+        @selected = @cursor if @grid[@cursor[0]][@cursor[1]].empty?(@cursor[0], @cursor[1])
+        puts "@selected: #{@selected}"
+        puts "#{@grid[@cursor[0]][@cursor[1]]}"
       end
 
       if @selected != nil
@@ -60,9 +64,6 @@ class Display
     else
       puts "Key unknown"
     end
-
-    system("clear")
-    render
   end
 
   def find_piece
