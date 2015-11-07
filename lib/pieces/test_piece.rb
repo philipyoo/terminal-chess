@@ -8,10 +8,16 @@ class TestPiece
 end
 
 class EmptyPiece
-  attr_reader :image, :color
+  attr_reader :image, :color, :position
 
   def initialize
     @color = :default
     @image = "    "
+    @position = nil
   end
+
+  def empty?(y, x)
+    true
+  end
+
 end

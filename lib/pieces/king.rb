@@ -1,12 +1,6 @@
+require_relative 'piece'
 
-class King
-  attr_reader :image, :color
-
-  def initialize(color, position)
-    @color, @position = color, position
-    @image = " #{symbol(color)}  "
-  end
-
+class King < Piece
   def symbol(color)
     "\u265A".encode('utf-8')
   end
