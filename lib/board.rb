@@ -22,7 +22,11 @@ class Board
     #raise error if no piece at start_pos and/or can't move selected piece to end_pos assigned
     piece = self[start_pos]
 
-    p "#{piece.valid_moves}"
+    p "board piece: #{piece}"
+    p "board piece moves: #{piece.valid_moves}"
+
+
+
     #If !check?
     if piece.valid_moves.include?(end_pos)
       move_piece!(start_pos, end_pos)
@@ -38,11 +42,20 @@ class Board
     piece.position = end_pos
     self[start_pos] = EmptyPiece.new
 
+    p "------"
+    p "piece: #{piece}"
+    p "start_pos: #{start_pos}"
+    p "start: #{self[start_pos]}"
+    p "end_pos: #{end_pos}"
+    p "end: #{self[end_pos]}"
+    p "piece.position: #{piece.position}"
+    p "------"
+
     nil
   end
 
-  def empty?(position)
-    self.empty?(position)
+  def empty?(y, x)
+    self.empty?(y, x)
   end
 
   private
