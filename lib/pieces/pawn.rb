@@ -9,9 +9,13 @@ class Pawn < Piece
     moves = []
     current_y, current_x = @position
 
+    p "Pawn @position: #{@position}"
+
     move_dirs.each do |dir_y, dir_x|
       moves << ([current_y + dir_y, current_x + dir_x])
     end
+
+    p "Pawn moves: #{moves}"
 
     moves
   end

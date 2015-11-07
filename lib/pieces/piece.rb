@@ -10,15 +10,22 @@ class Piece
     @image = " #{symbol(color)}  "
   end
 
-  def pos(position)
-    raise "nil error" if position.include?(nil)
+  # def [](position)
+  #   # raise "nil error" if position.include?(nil)
+  #
+  #   y, x = position
+  #   @grid[y][x]
+  # end
+  #
+  # def []=(position, piece)
+  #   y, x = position
+  #   @grid[y][x] = piece
+  # end
 
-    y, x = position
-    @grid[y][x]
-  end
 
-  def empty?(position) # checks if empty space
-    pos(position).is_a?(EmptyPiece)
+
+  def empty?(y, x) # checks if empty space
+    @grid[y][x].is_a?(EmptyPiece)
   end
 
   def move_makes_check?(to_position) #if piece moved puts your king in check

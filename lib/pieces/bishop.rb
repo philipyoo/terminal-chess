@@ -1,12 +1,6 @@
+require_relative 'piece'
 
-class Bishop
-  attr_reader :image, :color
-
-  def initialize(color, position)
-    @color, @position = color, position
-    @image = " #{symbol(color)}  "
-  end
-
+class Bishop < Piece
   def symbol(color)
     "\u265D".encode('utf-8')
   end
