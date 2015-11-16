@@ -44,7 +44,7 @@ module Slideable
       if empty?(current_y, current_x)  # space is unoccupied?
         moves << [current_y, current_x]
       else
-        moves << [current_y, current_x] if @grid[current_y][current_x].color != @color
+        moves << [current_y, current_x] if @color != position_color(current_y, current_x)
         break   # can't move past a blocking piece
       end
     end

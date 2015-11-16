@@ -9,8 +9,6 @@ class Pawn < Piece
     moves = []
     current_y, current_x = @position
 
-    p "Pawn @position: #{@position}"
-
     move_dirs.each do |dir_y, dir_x|
       new_y = current_y + dir_y
       new_x = current_x + dir_x
@@ -24,8 +22,6 @@ class Pawn < Piece
 
       moves << ([new_y, new_x]) if position_color(new_y, new_x) == opponent_color
     end
-
-    p "Pawn moves: #{moves}"
 
     moves
   end
