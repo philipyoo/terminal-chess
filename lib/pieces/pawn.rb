@@ -12,10 +12,18 @@ class Pawn < Piece
     p "Pawn @position: #{@position}"
 
     move_dirs.each do |dir_y, dir_x|
-      moves << ([current_y + dir_y, current_x + dir_x]) if empty?(current_y + dir_y, current_x + dir_x)
+      new_y = current_y + dir_y
+      new_x = current_x + dir_x
+
+      moves << ([new_y, new_x]) if empty?(new_y, new_x)
     end
 
-    moves.concat(attack_moves)
+    attack_moves.each do |dir_y, dir_x|
+      new_y = current_y + dir_y
+      new_x = current_x + dir_x
+
+      moves << ([new_y, new_x]) if position_color(new_y, new_x) == opponent_color
+    end
 
     p "Pawn moves: #{moves}"
 
@@ -42,16 +50,11 @@ class Pawn < Piece
     false
   end
 
+  def opponent_color
+    color == :white ? :light_yellow : :white
+  end
+
   def attack_moves
-    moves = []
-    current_y, current_x = @position
-    possible_moves = color == :white ? [[-1, -1], [-1, 1]] : [[1, 1], [1, -1]]
-    opponent_color = color == :white ? :light_yellow : :white
-
-    possible_moves.each do |dir_y, dir_x|
-      moves << ([current_y + dir_y, current_x + dir_x]) if @grid[current_y + dir_y][current_x + dir_x].color == opponent_color
-    end
-
-    moves
+    color == :white ? [[-1, -1], [-1, 1]] : [[1, 1], [1, -1]]
   end
 end
