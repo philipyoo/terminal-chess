@@ -12,7 +12,8 @@ class Pawn < Piece
     p "Pawn @position: #{@position}"
 
     move_dirs.each do |dir_y, dir_x|
-      moves << ([current_y + dir_y, current_x + dir_x])
+      #make sure not blocked
+      moves << ([current_y + dir_y, current_x + dir_x]) if empty?(current_y + dir_y, current_x + dir_x)
     end
 
     p "Pawn moves: #{moves}"
