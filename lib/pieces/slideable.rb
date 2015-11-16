@@ -24,22 +24,11 @@ module Slideable
   def unblocked_moves(dir_y, dir_x)
     current_y, current_x = @position
 
-    p "Start y, x: #{current_y}, #{current_x}"
-
     moves = []
 
     loop do
       current_y += dir_y
       current_x += dir_x
-
-
-      break unless valid_position?([current_y, current_x])  #on the board?
-
-      p "Current y, x: #{current_y}, #{current_x}"
-      if valid_position?([current_y, current_x])
-        p "TESTER: #{@grid[current_y][current_x]}"
-        p "position[6][2]: #{@grid[6][2]}"
-      end
 
       if empty?(current_y, current_x)  # space is unoccupied?
         moves << [current_y, current_x]
@@ -48,8 +37,6 @@ module Slideable
         break   # can't move past a blocking piece
       end
     end
-
-    puts "unblocked_moves: #{moves}"
 
     moves
   end
