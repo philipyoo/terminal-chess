@@ -12,9 +12,10 @@ class Pawn < Piece
     p "Pawn @position: #{@position}"
 
     move_dirs.each do |dir_y, dir_x|
-      #make sure not blocked
       moves << ([current_y + dir_y, current_x + dir_x]) if empty?(current_y + dir_y, current_x + dir_x)
     end
+
+    moves.concat(attack_moves)
 
     p "Pawn moves: #{moves}"
 
@@ -39,5 +40,18 @@ class Pawn < Piece
     end
 
     false
+  end
+
+  def attack_moves
+    moves = []
+    current_y, current_x = @position
+    possible_moves = color == :white ? [[-1, -1], [-1, 1]] : [[1, 1], [1, -1]]
+    opponent_color = color == :white ? :light_yellow : :white
+
+    possible_moves.each do |dir_y, dir_x|
+      moves << ([current_y + dir_y, current_x + dir_x]) if @grid[current_y + dir_y][current_x + dir_x].color == opponent_color
+    end
+
+    moves
   end
 end
