@@ -14,7 +14,7 @@ class Piece
     @grid[y][x].is_a?(EmptyPiece)
   end
 
-  def position_color(y, x)
+  def position_color?(y, x)
     @grid[y][x].color
   end
 

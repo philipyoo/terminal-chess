@@ -20,7 +20,7 @@ class Pawn < Piece
       new_y = current_y + dir_y
       new_x = current_x + dir_x
 
-      moves << ([new_y, new_x]) if position_color(new_y, new_x) == opponent_color
+      moves << ([new_y, new_x]) if position_color?(new_y, new_x) == opponent_color
     end
 
     moves

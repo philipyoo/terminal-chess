@@ -42,6 +42,10 @@ class Play
     end
 
     puts "GAME OVER!"
+
+    #switch player here because i'm lazy :)
+    switch_player
+    puts "Congrats #{@current_player}! You have won!"
   end
 
   def switch_player
@@ -65,7 +69,7 @@ class Play
   end
 
   def instructions
-    # system("clear")
+    system("clear")
     puts "Instructions: "
     puts "Use the arrow keys to move the cursor."
     puts "Use the enter/return key to select a piece."
@@ -75,7 +79,7 @@ class Play
   end
 
   def win_condition
-    false
+    @board.checkmate?
   end
 end
 
