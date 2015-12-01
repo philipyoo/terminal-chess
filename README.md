@@ -14,8 +14,10 @@ A 2-Player Chess game played in the terminal.
 ## Setup
 
 In the terminal:
+
 1. `git clone https://github.com/philipyoo/terminal-chess.git`
 2. `cd terminal-chess`
 3. `gem install colorize`
 4. `cd lib`
 5. `ruby run.rb`
+6. Play the game! Instructions in-game  :)
