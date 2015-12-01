@@ -3,9 +3,12 @@ require_relative 'piece'
 class Board
   attr_reader :grid
 
-  def initialize
+  def initialize(fill_board = true)
     @grid = Array.new(8) { Array.new(8) }
-    setup_grid
+
+    if fill_board
+      setup_grid
+    end
   end
 
   def [](position)
@@ -21,51 +24,32 @@ class Board
   def move(color, start_pos, end_pos)
     piece = self[start_pos]
 
-    p "board piece: #{piece}"
-    p "board piece moves: #{piece.valid_moves}"
-
-    #if I'm put in_check?  #need to somehow notify player that he/she is still in_check?
-    ## move on dupe board
-    ## check if still in_check?
-    ### if so, raise StandardError, "King still in check"
-    ## else if not in_check?
-    ### move on @grid board
+    test_board = dupe_board
 
     if piece.valid_moves.include?(end_pos)
+      #move on duped board
+      move_piece!(start_pos, end_pos, test_board)
+      king_pos = test_board.find_king(color)
+      opponent_moves = test_board.all_opponent_moves(color)
 
+      if in_check?(king_pos, opponent_moves)
+        #invalid move
+        raise StandardError, "Can't move there. King will be in check."
+      else
         move_piece!(start_pos, end_pos)
-      # end
+      end
+
     else
       raise StandardError, "Invalid move"
     end
   end
 
-  def move_conditionals(piece, start_pos, end_pos)
-    dupe_board
+  def move_piece!(start_pos, end_pos, board = self)
+    piece = board[start_pos]
 
-    # piece.valid_moves.include?(end_pos) &&
-
-  end
-
-  def move_piece!(start_pos, end_pos)
-    p "*" * 100
-    p self
-
-    piece = self[start_pos]
-
-    self[end_pos] = piece
+    board[end_pos] = piece
     piece.position = end_pos
-    self[start_pos] = EmptyPiece.new
-
-    p "------"
-    # p check_grid(find_king)
-    p "piece: #{piece}"
-    p "start_pos: #{start_pos}"
-    p "start: #{self[start_pos]}"
-    p "end_pos: #{end_pos}"
-    p "end: #{self[end_pos]}"
-    p "piece.position: #{piece.position}"
-    p "------"
+    board[start_pos] = EmptyPiece.new
 
     nil
   end
@@ -74,54 +58,56 @@ class Board
     self.empty?(y, x)
   end
 
-  def position_color?(y, x)
-    self.position_color?(y, x)
+  def in_check?(king_pos, opp_moves)
+    opp_moves.include?(king_pos)
   end
 
-  def in_check?(board)
-    all_opponent_moves.include?(find_king)
+  def checkmate?(color)
+    king_pos = self.find_king(color)
+    opponent_moves = self.all_opponent_moves(color)
+
+    return true if in_check?(king_pos, opponent_moves) && any_king_moves?(king_pos, opponent_moves)
   end
 
-  def checkmate?
-    return true if in_check?(@grid) && any_king_moves?
-  end
-
-  def all_opponent_moves
+  def all_opponent_moves(color)
     all_moves = []
 
-    p self
-    p "?" * 100
+    opp_pieces = self.grid.flatten.select do |piece|
+      if piece.color
+        piece.color == opponent_color(color)
+      end
+    end
 
-    # TODO: color??
-    # opp_pieces = all_pieces.select { |piece| piece.color != current_color }
+    all_moves.concat(opp_pieces.map { |piece| piece.valid_moves }).select { |arr| arr.length > 0 }
 
-    # opp_pieces.each do |piece|
-    #   all_moves.concat(piece.valid_moves)
-    # end
-
-    all_moves
+    all_moves.flatten(1)
   end
 
-  # find all pieces on the board... Helper method
-  def all_pieces
-    @grid.flatten.find_all { |pos| !pos.is_a?(EmptyPiece) }
+  def opponent_color(color)
+    color == :white ? :light_yellow : :white
   end
 
-  def find_king
-    # all_pieces.find { |piece| piece.color == current_color && piece.is_a?(King) }
+  def find_king(color)
+    self.grid.flatten.find_all { |loc| loc.is_a?(King) }.select { |piece| piece.color == color}.map { |piece| piece.position }.flatten
   end
 
   # used to find if any king moves are available. This also checks if a kings valid_moves puts the king in check
-  def any_king_moves?
-    (find_king.valid_moves - all_opponent_moves).length == 0
+  def any_king_moves?(king_pos, opp_moves)
+    opp_color = opponent_color(self[king_pos].color)
+
+    (self[king_pos].valid_moves - all_opponent_moves(opp_color)).length == 0
   end
 
   def dupe_board
-    temp_board = Array.new(8) { Array.new(8) }
+    temp_board = Board.new(false)
 
-    temp_board.each do |row, y|
-      row.each do |piece, x|
-        piece = @grid[y][x]
+    @grid.each.with_index do |row, y|
+      row.each.with_index do |piece, x|
+        if piece.class == EmptyPiece
+          temp_board.grid[y][x] = EmptyPiece.new
+        else
+          temp_board.grid[y][x] = piece.class.new(piece.color, [y, x], temp_board.grid)
+        end
       end
     end
 

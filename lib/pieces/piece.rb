@@ -15,14 +15,13 @@ class Piece
   end
 
   def position_color?(y, x)
-    @grid[y][x].color
+    if valid_position?([y, x])
+      @grid[y][x].color
+    end
   end
 
   def valid_position?(coords)
     coords.all? { |coord| coord.between?(0, 7) }
-  end
-
-  def move_makes_check?(to_position) #if piece moved puts your king in check
   end
 
 end

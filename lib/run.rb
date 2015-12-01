@@ -12,7 +12,7 @@ class Play
   def run_game
     intro
 
-    until win_condition
+    until win_condition(@current_color)
       begin
         start_pos, end_pos = nil, nil
         until start_pos && end_pos
@@ -78,8 +78,8 @@ class Play
     puts "-----"
   end
 
-  def win_condition
-    @board.checkmate?
+  def win_condition(color)
+    @board.checkmate?(color)
   end
 end
 

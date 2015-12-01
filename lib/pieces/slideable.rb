@@ -30,6 +30,8 @@ module Slideable
       current_y += dir_y
       current_x += dir_x
 
+      break if !valid_position?([current_y, current_x])
+
       if empty?(current_y, current_x)  # space is unoccupied?
         moves << [current_y, current_x]
       else
