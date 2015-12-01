@@ -10,6 +10,4 @@ class Queen < Piece
   def move_dirs
     dirs_diagonal + dirs_straight
   end
-
-
 end
