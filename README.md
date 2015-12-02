@@ -21,3 +21,11 @@ In the terminal:
 4. `cd lib`
 5. `ruby run.rb`
 6. Play the game! Instructions in-game  :)
+
+
+## Future Implementations
+
+- Method `still_in_check?` uses way too much memory (Currently O(n^3)ish). Need to refactor this somehow
+- When a Pawn reaches the opposite end, it can be changed into any other piece.
+- Display messages like Check or Checkmate to the current player
+- Add castling of King

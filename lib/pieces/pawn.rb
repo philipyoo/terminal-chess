@@ -27,11 +27,23 @@ class Pawn < Piece
   end
 
   def move_dirs
-    if not_moved?
+    if not_moved? && unblocked?
       color == :white ? [[-1, 0], [-2, 0]] : [[1, 0], [2, 0]]
     else
       color == :white ? [[-1, 0]] : [[1, 0]]
     end
+  end
+
+  def unblocked?
+    y, x = position
+
+    if color == :white
+      return true if @grid[-1 + y][x].is_a?(EmptyPiece)
+    elsif color == :light_yellow
+      return true if @grid[1 + y][x].is_a?(EmptyPiece)
+    end
+
+    false
   end
 
   def not_moved?

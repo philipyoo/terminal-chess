@@ -41,11 +41,13 @@ class Play
       end
     end
 
+    system("clear")
     puts "GAME OVER!"
+    @display.render
 
     #switch player here because i'm lazy :)
     switch_player
-    puts "Congrats #{@current_player}! You have won!"
+    puts "Congrats Player #{@current_player}! You have won!"
   end
 
   def switch_player
