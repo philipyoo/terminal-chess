@@ -66,7 +66,30 @@ class Board
     king_pos = self.find_king(color)
     opponent_moves = self.all_opponent_moves(color)
 
-    return true if in_check?(king_pos, opponent_moves) && any_king_moves?(king_pos, opponent_moves)
+    return true if in_check?(king_pos, opponent_moves) && any_king_moves?(king_pos, opponent_moves) && still_in_check?(color)
+  end
+
+  def still_in_check?(color)
+    # TODO: this is gonna take up a ton of memory. Need to refactor this somehow
+
+    #for each of my pieces, move and check if still in_check?
+    all_pieces(color).each do |piece|
+      piece.valid_moves.each do |move|
+        test_board = dupe_board
+
+        move_piece!(piece.position, move, test_board)
+        king_pos = test_board.find_king(color)
+        opp_moves = test_board.all_opponent_moves(color)
+
+        return false if !in_check?(king_pos, opp_moves)
+      end
+    end
+
+    true
+  end
+
+  def all_pieces(color)
+    self.grid.flatten.select{ |piece| piece.color == color }
   end
 
   def all_opponent_moves(color)
