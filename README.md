@@ -2,7 +2,7 @@
 
 A 2-Player Chess game played in the terminal.
 
-![](http://postimg.org/image/ogexf1e5t/ "On Run Screenshot")
+![](http://s24.postimg.org/a9z6jt3at/Screen_Shot_2015_11_02_at_3_55_38_PM.png "On Run Screenshot")
 
 
 ## Goals
