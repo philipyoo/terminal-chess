@@ -1,7 +1,7 @@
 require 'colorize'
 require 'io/console'
 require_relative 'board'
-require_relative 'pieces/test_piece'
+# require_relative 'pieces/test_piece'
 
 
 class Display
@@ -30,7 +30,7 @@ class Display
   end
 
   def handle_input(color, select_piece = false)
-    #get users input keystroke and get the symbol
+    #get users input keystroke and set `user_input` to the symbol
     user_input = KEYSTROKES[read_char]
 
     case user_input
@@ -42,12 +42,8 @@ class Display
       if select_piece
         @selected = nil
         @selected = @cursor if @grid[@cursor[0]][@cursor[1]].color ==  color
-        puts "@selected: #{@selected}"
-        puts "#{@grid[@cursor[0]][@cursor[1]]}"
       else
         @selected = @cursor if @grid[@cursor[0]][@cursor[1]].empty?(@cursor[0], @cursor[1])
-        puts "@selected: #{@selected}"
-        puts "#{@grid[@cursor[0]][@cursor[1]]}"
       end
 
       if @selected != nil
@@ -110,10 +106,10 @@ class Display
   end
 
   def render
-    puts "Board:"
     build_grid.each { |row| puts row.join }
   end
 
+  # I/O functionality
   def read_char
     STDIN.echo = false
     STDIN.raw!
