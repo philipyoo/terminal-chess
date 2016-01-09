@@ -17,7 +17,7 @@ class Play
       begin
         # Get Players start and end position moves for a piece
         start_pos, end_pos = nil, nil
-        until start_pos && end_pos
+        until start_pos && end_po
           instructions
 
           puts "\nCurrent Player: " +  "#{@current_player}".colorize(@current_color).bold
@@ -34,19 +34,22 @@ class Play
 
           # If I received start position (Player selected own piece)
           if start_pos
-            puts "Selected Piece. Move where?"
+            puts "Selected a piece. Where do you want to move it?"
             end_pos = @display.handle_input(current_color)
 
+            # If user pressed backspace or delete, start_pos reset
             if end_pos == "reset"
               start_pos, end_pos = nil, nil
             end
           else
+            # Player needs to select a start position (Own piece)
             puts "Select a piece."
             start_pos = @display.handle_input(current_color, true)
           end
         end
 
-        # After collecting
+        # After collecting necessary information
+        # `move` method checks if move is valid. If invalid, error is raised. If valid, make move on board and switch players
         @board.move(@current_color, start_pos, end_pos)
         @error = nil
         switch_player
@@ -56,11 +59,13 @@ class Play
       end
     end
 
+    # Once checkmate is made...
     system("clear")
     puts "GAME OVER!"
     @display.render
 
     #switch player here because i'm lazy :)
+    # Player is switched to display winning message for player that won
     switch_player
     puts "Congrats Player #{@current_player}! You have won!"
   end
