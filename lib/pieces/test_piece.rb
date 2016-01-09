@@ -1,4 +1,5 @@
 
+# Class used initially to fill and test board
 class TestPiece
   attr_reader :img
 
@@ -7,6 +8,7 @@ class TestPiece
   end
 end
 
+# Object class used for empty spaces on board
 class EmptyPiece
   attr_reader :image, :color, :position
 
