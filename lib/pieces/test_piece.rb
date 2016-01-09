@@ -21,5 +21,4 @@ class EmptyPiece
   def empty?(y, x)
     true
   end
-
 end

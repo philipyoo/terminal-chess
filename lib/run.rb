@@ -17,24 +17,23 @@ class Play
       begin
         # Get Players start and end position moves for a piece
         start_pos, end_pos = nil, nil
-        until start_pos && end_po
+        until start_pos && end_pos
           instructions
 
           puts "\nCurrent Player: " +  "#{@current_player}".colorize(@current_color).bold
           puts "\n-----"
 
-          # If an error was raised..
-          if @error
-            puts "\n    " + "#{@error}".colorize({:background => :red, :color => :light_yellow})
-            puts "\n\n"
-          end
-
           # Render board display
           @display.render
 
+          # If an error was raised..
+          if @error
+            puts "\n    " + "#{@error}".colorize({:background => :red, :color => :light_yellow})
+          end
+
           # If I received start position (Player selected own piece)
           if start_pos
-            puts "Selected a piece. Where do you want to move it?"
+            puts "\n > Selected a piece. Where do you want to move it?"
             end_pos = @display.handle_input(current_color)
 
             # If user pressed backspace or delete, start_pos reset
@@ -43,9 +42,10 @@ class Play
             end
           else
             # Player needs to select a start position (Own piece)
-            puts "Select a piece."
+            puts "\n > Select a piece."
             start_pos = @display.handle_input(current_color, true)
           end
+
         end
 
         # After collecting necessary information

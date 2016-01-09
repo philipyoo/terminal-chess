@@ -1,4 +1,5 @@
 
+# Used for King and Knight
 module Stepable
   def valid_moves
     moves = []
@@ -13,6 +14,8 @@ module Stepable
 
     moves
   end
+
+  private
 
   def conditionals?(y, x)
     if valid_position?([y, x])

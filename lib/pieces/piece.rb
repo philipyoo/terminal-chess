@@ -1,6 +1,7 @@
 require_relative 'slideable'
 require_relative 'stepable'
 
+# All shared functionality of every piece. Parent class
 class Piece
   attr_reader :image, :color
   attr_accessor :position
@@ -10,7 +11,7 @@ class Piece
     @image = " #{symbol(color)}  "
   end
 
-  def empty?(y, x) # checks if empty space
+  def empty?(y, x)
     @grid[y][x].is_a?(EmptyPiece)
   end
 
