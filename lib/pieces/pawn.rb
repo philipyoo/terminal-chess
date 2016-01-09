@@ -30,7 +30,7 @@ class Pawn < Piece
   private
 
   def attack_moves
-    color == :whiter ? [[-1, -1], [-1, 1]] : [[1, 1], [1, -1]]
+    color == :white ? [[-1, -1], [-1, 1]] : [[1, 1], [1, -1]]
   end
 
   def move_dirs
