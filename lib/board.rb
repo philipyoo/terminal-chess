@@ -70,7 +70,7 @@ class Board
   end
 
   def still_in_check?(color)
-    # TODO: this is gonna take up a ton of memory. Need to refactor this somehow
+    # TODO: this is gonna take up a ton of time. Need to refactor this somehow
 
     #for each of my pieces, move and check if still in_check?
     all_pieces(color).each do |piece|
