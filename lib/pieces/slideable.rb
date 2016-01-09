@@ -1,4 +1,5 @@
 
+# Used for Queen, Bishop, Rook
 module Slideable
   DIAGONAL = [[1, 1], [1, -1], [-1, 1], [-1, -1]]
   STRAIGHT = [[1, 0], [0, 1], [-1, 0], [0, -1]]
@@ -21,6 +22,9 @@ module Slideable
     moves
   end
 
+  private
+
+  # Slideable pieces cannot jump over their own color pieces and they can't surpass enemy pieces, but can capture enemy piece
   def unblocked_moves(dir_y, dir_x)
     current_y, current_x = @position
 
