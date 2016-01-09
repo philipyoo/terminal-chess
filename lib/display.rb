@@ -1,7 +1,6 @@
 require 'colorize'
 require 'io/console'
 require_relative 'board'
-# require_relative 'pieces/test_piece'  # used for `empty?` method
 
 class Display
   # I/O keys
